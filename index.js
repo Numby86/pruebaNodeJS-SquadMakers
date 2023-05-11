@@ -1,10 +1,18 @@
 const express = require("express");
 const axios = require("axios");
+const jokesRouter = require('./routes/jokes.routes.js');
+const connect = require('./utils/db/connect.js');
+const cors = require('cors');
+const createError = require('./utils/errors/create-errors.js');
+
+connect();
 
 const PORT = 3000;
 const server = express();
 
-const jokesRouter = require('./routes/jokes.routes.js');
+server.use(cors());
+server.use(express.json());
+server.use(express.urlencoded({ extended: false }));
 
 server.use('/jokes', jokesRouter);
 

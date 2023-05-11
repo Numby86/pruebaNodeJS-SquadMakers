@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
-
 const jokesRouter = express.Router();
+const Joke = require('../models/Jokes.js')
 
 jokesRouter.get('/:type', async (req, res) => {
   const jokeType = req.params.type;
@@ -29,5 +29,18 @@ jokesRouter.get('/:type', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong' });
   }
 });
+
+jokesRouter.post('/newJoke', async (req, res) => {
+
+    try {
+      const newJoke = new Joke({ ...req.body });
+      const createdJoke = await newJoke.save();
+      return res.status(201).json(createdJoke);
+  
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+  });
 
 module.exports = jokesRouter;
