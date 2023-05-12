@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const jokeSchema = new mongoose.Schema(
     {
-        joke: { type: String, unique: true, required: true }
+        joke: { type: String, unique: true, required: true },
+        numberJoke: { type: String, unique: true, required: true }
     },
     {
         timestamps: true
