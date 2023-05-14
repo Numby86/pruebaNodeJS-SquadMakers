@@ -29,6 +29,12 @@ server.get("/", async (req, res) => {
   }
 });
 
+server.use('*', (req, res, next) => {
+  next(createError('Esta ruta no existe', 404));
+});
+
 server.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`);
 });
+
+module.exports = server;
